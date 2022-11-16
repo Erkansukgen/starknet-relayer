@@ -1,12 +1,12 @@
-export function rpcSuccess(res, result, id) {
+export const rpcSuccess = (res, result, id) => {
   res.json({
     jsonrpc: '2.0',
     result,
     id
   });
-}
+};
 
-export function rpcError(res, code, e, id) {
+export const rpcError = (res, code, e, id) => {
   res.status(code).json({
     jsonrpc: '2.0',
     error: {
@@ -16,4 +16,4 @@ export function rpcError(res, code, e, id) {
     },
     id
   });
-}
+};

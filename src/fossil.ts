@@ -3,14 +3,13 @@ import fetch from 'cross-fetch';
 import { Wallet } from '@ethersproject/wallet';
 import { Contract } from '@ethersproject/contracts';
 import { JsonRpcProvider } from '@ethersproject/providers';
-import { utils } from '@snapshot-labs/sx';
 import { defaultProvider, Account, ec } from 'starknet';
+import { utils } from '@prophouse/sdk';
 
 const ethPrivkey = process.env.ETH_PRIVKEY || '';
 const ethRpcUrl = process.env.ETH_RPC_URL || '';
 const provider = new JsonRpcProvider(ethRpcUrl);
-let wallet = new Wallet(ethPrivkey);
-wallet = wallet.connect(provider);
+const wallet = new Wallet(ethPrivkey, provider);
 
 const fossilAddress = process.env.FOSSIL_ADDRESS || '';
 const fossilL1HeadersStoreAddress =
@@ -23,19 +22,19 @@ const starknetAddress = process.env.STARKNET_ADDRESS || '';
 const starkKeyPair = ec.getKeyPair(starknetPrivkey);
 const starknetAccount = new Account(defaultProvider, starknetAddress, starkKeyPair);
 
-async function sendExactParentHashToL2(blockNumber: number) {
+const sendExactParentHashToL2 = async (blockNumber: number) => {
   const contract = new Contract(fossilAddress, abi);
   const contractWithSigner = contract.connect(wallet);
   return contractWithSigner.sendExactParentHashToL2(blockNumber);
-}
+};
 
-async function sendLatestParentHashToL2() {
+const sendLatestParentHashToL2 = async () => {
   const contract = new Contract(fossilAddress, abi);
   const contractWithSigner = contract.connect(wallet);
   return contractWithSigner.sendLatestParentHashToL2();
-}
+};
 
-async function processBlock(blockNumber: number) {
+const processBlock = async (blockNumber: number) => {
   const res = await fetch(ethRpcUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -58,7 +57,6 @@ async function processBlock(blockNumber: number) {
           processBlockInputs.blockNumber,
           processBlockInputs.headerInts.bytesLength,
           processBlockInputs.headerInts.values.length,
-          // @ts-ignore
           ...processBlockInputs.headerInts.values
         ]
       }
@@ -66,7 +64,7 @@ async function processBlock(blockNumber: number) {
     undefined,
     { maxFee: '857400005301800' }
   );
-}
+};
 
 const router = express.Router();
 
