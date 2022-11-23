@@ -769,10 +769,10 @@
   dependencies:
     ethers "~5.5.0"
 
-"@prophouse/sdk@~0.1.0-alpha.0":
-  version "0.1.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@prophouse/sdk/-/sdk-0.1.0-alpha.0.tgz#f87f77102dbcc966727463e02de83001576b83ad"
-  integrity sha512-4FYrm9xp+yFVVozY/j4qaHYsOPZspeRHueff6eUJ30mHfIKETV52CP+IF7t6kjzZJICATXHh73LVxEId2IHbUQ==
+"@prophouse/sdk@~0.1.0-alpha.1":
+  version "0.1.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@prophouse/sdk/-/sdk-0.1.0-alpha.1.tgz#4e3f1a0730b20c99c5e3a5adc6b8dab02a3ef031"
+  integrity sha512-5ILzrVM+3ON2aUMNa2dR5B5aR1oVhiuwpuHNXcjzwMom38NnAobE3OGqtO5REzcp/BMKjPFJx4gsk03MStUq6Q==
   dependencies:
     "@ethereumjs/block" "~3.6.3"
     "@ethereumjs/common" "~2.6.5"
@@ -787,6 +787,7 @@
     "@ethersproject/solidity" "~5.5.0"
     "@prophouse/contracts" "~0.1.0-alpha"
     bn.js "^5.2.1"
+    randombytes "^2.1.0"
     starknet "^4.9.0"
     time-ts "^0.1.0"
 

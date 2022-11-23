@@ -6,7 +6,7 @@ import {
   EthSigVoteMessage,
   ProposeMessage,
   TimedFundingRoundAction,
-  TimedFundingRoundClient,
+  TimedFundingRoundStarknetTxClient,
   TimedFundingRoundEnvelope,
   VoteMessage
 } from '@prophouse/sdk';
@@ -15,7 +15,7 @@ interface TimedFundingRoundParams {
   envelope: TimedFundingRoundEnvelope;
 }
 
-const client = new TimedFundingRoundClient({
+const client = new TimedFundingRoundStarknetTxClient({
   ethUrl: process.env.ETH_RPC_URL as string,
   starkProvider: defaultProvider
 });
