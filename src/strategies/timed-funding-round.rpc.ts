@@ -1,46 +1,35 @@
 import { defaultProvider, InvokeFunctionResponse } from 'starknet';
+import { ChainId, TimedFunding, TimedFundingRound } from '@prophouse/sdk';
 import { rpcError, rpcSuccess } from '../utils';
 import { account } from '../config';
-import {
-  EthSigProposeMessage,
-  EthSigVoteMessage,
-  ProposeMessage,
-  TimedFundingRoundAction,
-  TimedFundingRoundStarknetTxClient,
-  TimedFundingRoundEnvelope,
-  VoteMessage
-} from '@prophouse/sdk';
 
-interface TimedFundingRoundParams {
-  envelope: TimedFundingRoundEnvelope;
-}
-
-const client = new TimedFundingRoundStarknetTxClient({
-  ethUrl: process.env.ETH_RPC_URL as string,
-  starkProvider: defaultProvider
+const evmChainId = parseInt(process.env.ETH_CHAIN_ID ?? ChainId.EthereumGoerli.toString());
+const round = new TimedFundingRound({
+  evmChainId,
+  evm: process.env.ETH_RPC_URL as string,
+  starknet: defaultProvider
 });
 
 export const rpc = {
-  async send(id: string, params: TimedFundingRoundParams, res: unknown) {
+  async send(id: string, params: TimedFunding.RequestParams, res: unknown) {
     try {
-      const { action } = params.envelope.data;
       let receipt: InvokeFunctionResponse | undefined;
 
-      switch (action) {
-        case TimedFundingRoundAction.Propose:
-          receipt = await client.propose(
+      switch (params.action) {
+        case TimedFunding.Action.Propose:
+          receipt = await round.relaySignedProposePayload(
             account,
-            params.envelope as TimedFundingRoundEnvelope<ProposeMessage | EthSigProposeMessage>
+            params as TimedFunding.RequestParams<TimedFunding.Action.Propose>
           );
           break;
-        case TimedFundingRoundAction.Vote:
-          receipt = await client.vote(
+        case TimedFunding.Action.Vote:
+          receipt = await round.relaySignedVotePayload(
             account,
-            params.envelope as TimedFundingRoundEnvelope<VoteMessage | EthSigVoteMessage>
+            params as TimedFunding.RequestParams<TimedFunding.Action.Vote>
           );
           break;
         default:
-          throw new Error(`Unknown action: ${action}.`);
+          throw new Error(`Unknown action: ${params.action}.`);
       }
       return rpcSuccess(res, receipt, id);
     } catch (error) {
