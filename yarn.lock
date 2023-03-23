@@ -767,17 +767,17 @@
   resolved "https://registry.yarnpkg.com/@noble/secp256k1/-/secp256k1-1.6.3.tgz#7eed12d9f4404b416999d0c87686836c4c5c9b94"
   integrity sha512-T04e4iTurVy7I8Sw4+c5OSN9/RkPlo1uKxAomtxQNLq8j1uPAqnsqG1bqvY3Jv7c13gyr6dui0zmh/I3+f/JaQ==
 
-"@prophouse/contracts@^0.1.0-alpha.8":
-  version "0.1.0-alpha.8"
-  resolved "https://registry.npmjs.org/@prophouse/contracts/-/contracts-0.1.0-alpha.8.tgz#d2fd5660af5a9016d491b1d3ae20c18c78f1467b"
-  integrity sha512-yV6GvNUabM2WlrNMxg/RCJJRmAdxPWvxJTCYAQgOHHaBOpYAM2IpiDyI5dvXsJ4Oo/WbSpsmSkzb/FOOpBFCmQ==
+"@prophouse/contracts@^0.1.0-alpha.9":
+  version "0.1.0-alpha.9"
+  resolved "https://registry.npmjs.org/@prophouse/contracts/-/contracts-0.1.0-alpha.9.tgz#b409f255201d4f338b4a0b3cff9464b7723f3780"
+  integrity sha512-bzBhd9HEPMbZ9pw6kBn5SICA1vF6SHxRD9eSApvsyg7re0ACgT2l0lNN1L7vB11r8K59OX8zkJLrwzONXQ6j+g==
   dependencies:
     ethers "~5.5.0"
 
-"@prophouse/sdk@~0.1.0-alpha.10":
-  version "0.1.0-alpha.10"
-  resolved "https://registry.npmjs.org/@prophouse/sdk/-/sdk-0.1.0-alpha.10.tgz#34017aa8ec56fa5c752f92a1cc60c003869b89b2"
-  integrity sha512-hdYW9O18umdSl8ZE9cTQRg2fBYc1hAezurSR9zHhYQ37SdFSRNHYDJ8bC2y+aXbCTvmopLN3tq+rj6aqfosU7g==
+"@prophouse/sdk@~0.1.0-alpha.11":
+  version "0.1.0-alpha.11"
+  resolved "https://registry.npmjs.org/@prophouse/sdk/-/sdk-0.1.0-alpha.11.tgz#5669359d5dabbc76dc62a6c1540e955fe5a02fee"
+  integrity sha512-XlXa4sy14405D7XOLJ9AuvaSx+NHK6IaZujCODENdvXaQotZt0/xuS3GiqBAEU+2kQ4DmVbhyCRhbw6YO9Aibg==
   dependencies:
     "@ethereumjs/block" "~3.6.3"
     "@ethereumjs/common" "~2.6.5"
@@ -790,7 +790,7 @@
     "@ethersproject/keccak256" "~5.5.0"
     "@ethersproject/providers" "~5.5.0"
     "@ethersproject/solidity" "~5.5.0"
-    "@prophouse/contracts" "^0.1.0-alpha.8"
+    "@prophouse/contracts" "^0.1.0-alpha.9"
     bn.js "^5.2.1"
     graphql "^16.5.0"
     graphql-request "^5.2.0"

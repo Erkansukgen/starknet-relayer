@@ -1,13 +1,8 @@
 import express from 'express';
 import fetch from 'cross-fetch';
-import { Wallet } from '@ethersproject/wallet';
 import { Contract } from '@ethersproject/contracts';
-import { JsonRpcProvider } from '@ethersproject/providers';
-import { defaultProvider, Account, ec } from 'starknet';
 import { utils } from '@prophouse/sdk';
-
-const ETH_PRIV_KEY = process.env.ETH_PRIVKEY || '';
-const ETH_RPC_URL = process.env.ETH_RPC_URL || '';
+import { ethWallet, ETH_RPC_URL, starknetAccount } from './config';
 
 const FOSSIL_ADDRESS = process.env.FOSSIL_ADDRESS || '';
 const FOSSIL_L1_HEADERS_STORE_ADDRESS =
@@ -18,24 +13,15 @@ const ABI = [
   'function sendLatestParentHashToL2() payable'
 ];
 
-const STARKNET_PRIV_KEY = process.env.STARKNET_PRIVKEY || '';
-const STARKNET_ADDRESS = process.env.STARKNET_ADDRESS || '';
-
-const provider = new JsonRpcProvider(ETH_RPC_URL);
-const wallet = new Wallet(ETH_PRIV_KEY, provider);
-
-const starkKeyPair = ec.getKeyPair(STARKNET_PRIV_KEY);
-const starknetAccount = new Account(defaultProvider, STARKNET_ADDRESS, starkKeyPair);
-
 const sendExactParentHashToL2 = async (blockNumber: number) => {
   const contract = new Contract(FOSSIL_ADDRESS, ABI);
-  const contractWithSigner = contract.connect(wallet);
+  const contractWithSigner = contract.connect(ethWallet);
   return contractWithSigner.sendExactParentHashToL2(blockNumber, { value: MAX_FEE });
 };
 
 const sendLatestParentHashToL2 = async () => {
   const contract = new Contract(FOSSIL_ADDRESS, ABI);
-  const contractWithSigner = contract.connect(wallet);
+  const contractWithSigner = contract.connect(ethWallet);
   return contractWithSigner.sendLatestParentHashToL2({ value: MAX_FEE });
 };
 

@@ -1,13 +1,13 @@
-import { defaultProvider, InvokeFunctionResponse } from 'starknet';
+import { InvokeFunctionResponse } from 'starknet';
 import { ChainId, TimedFunding, TimedFundingRound } from '@prophouse/sdk';
 import { rpcError, rpcSuccess } from '../utils';
-import { account } from '../config';
+import { starknetAccount, starknetProvider } from '../config';
 
 const evmChainId = parseInt(process.env.ETH_CHAIN_ID ?? ChainId.EthereumGoerli.toString());
 const round = new TimedFundingRound({
   evmChainId,
   evm: process.env.ETH_RPC_URL as string,
-  starknet: defaultProvider
+  starknet: starknetProvider
 });
 
 export const rpc = {
@@ -18,13 +18,13 @@ export const rpc = {
       switch (params.action) {
         case TimedFunding.Action.Propose:
           receipt = await round.relaySignedProposePayload(
-            account,
+            starknetAccount,
             params as TimedFunding.RequestParams<TimedFunding.Action.Propose>
           );
           break;
         case TimedFunding.Action.Vote:
           receipt = await round.relaySignedVotePayload(
-            account,
+            starknetAccount,
             params as TimedFunding.RequestParams<TimedFunding.Action.Vote>
           );
           break;
