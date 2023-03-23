@@ -4,8 +4,8 @@ import { Contract } from '@ethersproject/contracts';
 import { utils } from '@prophouse/sdk';
 import { ethWallet, ETH_RPC_URL, starknetAccount } from './config';
 
-const FOSSIL_ADDRESS = process.env.FOSSIL_ADDRESS || '';
-const FOSSIL_L1_HEADERS_STORE_ADDRESS =
+const HERODOTUS_ADDRESS = process.env.HERODOTUS_ADDRESS || '';
+const HERODOTUS_L1_HEADERS_STORE_ADDRESS =
   '0x1d9b36a00d7d5300e5da456c56d09c46dfefbc91b3a6b1552b6f2a34d6e34c4';
 const MAX_FEE = '857400005301800';
 const ABI = [
@@ -14,13 +14,13 @@ const ABI = [
 ];
 
 const sendExactParentHashToL2 = async (blockNumber: number) => {
-  const contract = new Contract(FOSSIL_ADDRESS, ABI);
+  const contract = new Contract(HERODOTUS_ADDRESS, ABI);
   const contractWithSigner = contract.connect(ethWallet);
   return contractWithSigner.sendExactParentHashToL2(blockNumber, { value: MAX_FEE });
 };
 
 const sendLatestParentHashToL2 = async () => {
-  const contract = new Contract(FOSSIL_ADDRESS, ABI);
+  const contract = new Contract(HERODOTUS_ADDRESS, ABI);
   const contractWithSigner = contract.connect(ethWallet);
   return contractWithSigner.sendLatestParentHashToL2({ value: MAX_FEE });
 };
@@ -41,7 +41,7 @@ const processBlock = async (blockNumber: number) => {
   return starknetAccount.execute(
     [
       {
-        contractAddress: FOSSIL_L1_HEADERS_STORE_ADDRESS,
+        contractAddress: HERODOTUS_L1_HEADERS_STORE_ADDRESS,
         entrypoint: 'process_block',
         calldata: [
           processBlockInputs.blockOptions,
