@@ -6,36 +6,41 @@ import { JsonRpcProvider } from '@ethersproject/providers';
 import { defaultProvider, Account, ec } from 'starknet';
 import { utils } from '@prophouse/sdk';
 
-const ethPrivkey = process.env.ETH_PRIVKEY || '';
-const ethRpcUrl = process.env.ETH_RPC_URL || '';
-const provider = new JsonRpcProvider(ethRpcUrl);
-const wallet = new Wallet(ethPrivkey, provider);
+const ETH_PRIV_KEY = process.env.ETH_PRIVKEY || '';
+const ETH_RPC_URL = process.env.ETH_RPC_URL || '';
 
-const fossilAddress = process.env.FOSSIL_ADDRESS || '';
-const fossilL1HeadersStoreAddress =
-  '0x6ca3d25e901ce1fff2a7dd4079a24ff63ca6bbf8ba956efc71c1467975ab78f';
+const FOSSIL_ADDRESS = process.env.FOSSIL_ADDRESS || '';
+const FOSSIL_L1_HEADERS_STORE_ADDRESS =
+  '0x1d9b36a00d7d5300e5da456c56d09c46dfefbc91b3a6b1552b6f2a34d6e34c4';
+const MAX_FEE = '857400005301800';
+const ABI = [
+  'function sendExactParentHashToL2(uint256) payable',
+  'function sendLatestParentHashToL2() payable'
+];
 
-const abi = ['function sendExactParentHashToL2(uint256)', 'function sendLatestParentHashToL2()'];
+const STARKNET_PRIV_KEY = process.env.STARKNET_PRIVKEY || '';
+const STARKNET_ADDRESS = process.env.STARKNET_ADDRESS || '';
 
-const starknetPrivkey = process.env.STARKNET_PRIVKEY || '';
-const starknetAddress = process.env.STARKNET_ADDRESS || '';
-const starkKeyPair = ec.getKeyPair(starknetPrivkey);
-const starknetAccount = new Account(defaultProvider, starknetAddress, starkKeyPair);
+const provider = new JsonRpcProvider(ETH_RPC_URL);
+const wallet = new Wallet(ETH_PRIV_KEY, provider);
+
+const starkKeyPair = ec.getKeyPair(STARKNET_PRIV_KEY);
+const starknetAccount = new Account(defaultProvider, STARKNET_ADDRESS, starkKeyPair);
 
 const sendExactParentHashToL2 = async (blockNumber: number) => {
-  const contract = new Contract(fossilAddress, abi);
+  const contract = new Contract(FOSSIL_ADDRESS, ABI);
   const contractWithSigner = contract.connect(wallet);
-  return contractWithSigner.sendExactParentHashToL2(blockNumber);
+  return contractWithSigner.sendExactParentHashToL2(blockNumber, { value: MAX_FEE });
 };
 
 const sendLatestParentHashToL2 = async () => {
-  const contract = new Contract(fossilAddress, abi);
+  const contract = new Contract(FOSSIL_ADDRESS, ABI);
   const contractWithSigner = contract.connect(wallet);
-  return contractWithSigner.sendLatestParentHashToL2();
+  return contractWithSigner.sendLatestParentHashToL2({ value: MAX_FEE });
 };
 
 const processBlock = async (blockNumber: number) => {
-  const res = await fetch(ethRpcUrl, {
+  const res = await fetch(ETH_RPC_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -50,7 +55,7 @@ const processBlock = async (blockNumber: number) => {
   return starknetAccount.execute(
     [
       {
-        contractAddress: fossilL1HeadersStoreAddress,
+        contractAddress: FOSSIL_L1_HEADERS_STORE_ADDRESS,
         entrypoint: 'process_block',
         calldata: [
           processBlockInputs.blockOptions,
@@ -62,7 +67,7 @@ const processBlock = async (blockNumber: number) => {
       }
     ],
     undefined,
-    { maxFee: '857400005301800' }
+    { maxFee: MAX_FEE }
   );
 };
 
