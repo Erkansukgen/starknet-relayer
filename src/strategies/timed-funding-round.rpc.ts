@@ -1,9 +1,8 @@
+import { ethChainId as evmChainId, starknetAccount, starknetProvider } from '../config';
+import { TimedFunding, TimedFundingRound } from '@prophouse/sdk';
 import { InvokeFunctionResponse } from 'starknet';
-import { ChainId, TimedFunding, TimedFundingRound } from '@prophouse/sdk';
 import { rpcError, rpcSuccess } from '../utils';
-import { starknetAccount, starknetProvider } from '../config';
 
-const evmChainId = parseInt(process.env.ETH_CHAIN_ID ?? ChainId.EthereumGoerli.toString());
 const round = new TimedFundingRound({
   evmChainId,
   evm: process.env.ETH_RPC_URL as string,

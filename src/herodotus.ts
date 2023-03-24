@@ -1,8 +1,7 @@
 import express from 'express';
-import fetch from 'cross-fetch';
 import { Contract } from '@ethersproject/contracts';
 import { utils } from '@prophouse/sdk';
-import { ethWallet, ETH_RPC_URL, starknetAccount } from './config';
+import { ethChainId, ethProvider, ethWallet, starknetAccount } from './config';
 
 const HERODOTUS_ADDRESS = process.env.HERODOTUS_ADDRESS || '';
 const HERODOTUS_L1_HEADERS_STORE_ADDRESS =
@@ -26,18 +25,11 @@ const sendLatestParentHashToL2 = async () => {
 };
 
 const processBlock = async (blockNumber: number) => {
-  const res = await fetch(ETH_RPC_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      jsonrpc: '2.0',
-      method: 'eth_getBlockByNumber',
-      params: [`0x${blockNumber.toString(16)}`, false],
-      id: 1
-    })
-  });
-  const block = (await res.json()).result;
-  const processBlockInputs = utils.storageProofs.getProcessBlockInputs(block);
+  const processBlockInputs = await utils.storageProofs.getProcessBlockInputsForBlockNumber(
+    ethProvider,
+    blockNumber,
+    ethChainId
+  );
   return starknetAccount.execute(
     [
       {

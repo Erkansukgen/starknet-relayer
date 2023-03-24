@@ -1,8 +1,5 @@
-import fetch from 'cross-fetch';
 import express from 'express';
 import { timedFundingRound } from './strategies';
-
-global.fetch = fetch;
 
 const router = express.Router();
 
