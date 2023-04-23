@@ -111,7 +111,7 @@
     "@ethersproject/properties" "^5.7.0"
     "@ethersproject/strings" "^5.7.0"
 
-"@ethersproject/abstract-provider@5.7.0", "@ethersproject/abstract-provider@^5.7.0":
+"@ethersproject/abstract-provider@5.7.0", "@ethersproject/abstract-provider@^5.7.0", "@ethersproject/abstract-provider@~5.7.0":
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/@ethersproject/abstract-provider/-/abstract-provider-5.7.0.tgz#b0a8550f88b6bf9d51f90e4795d48294630cb9ef"
   integrity sha512-R41c9UkchKCpAqStMYUpdunjo3pkEvZC3FAwZn5S5MGbXoMQOHIdHItezTETxAO5bevtMApSyEhn9+CHcDsWBw==
@@ -124,7 +124,7 @@
     "@ethersproject/transactions" "^5.7.0"
     "@ethersproject/web" "^5.7.0"
 
-"@ethersproject/abstract-signer@5.7.0", "@ethersproject/abstract-signer@^5.7.0":
+"@ethersproject/abstract-signer@5.7.0", "@ethersproject/abstract-signer@^5.7.0", "@ethersproject/abstract-signer@~5.7.0":
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/@ethersproject/abstract-signer/-/abstract-signer-5.7.0.tgz#13f4f32117868452191a4649723cb086d2b596b2"
   integrity sha512-a16V8bq1/Cz+TGCkE2OPMTOUDLS3grCpdjoJCYNnVBbdYEMSgKrU0+B90s8b6H+ByYTBZN7a3g76jdIJi7UfKQ==
@@ -526,12 +526,14 @@
   dependencies:
     ethers "~5.7.2"
 
-"@prophouse/sdk@~0.1.0-alpha.14":
-  version "0.1.0-alpha.14"
-  resolved "https://registry.npmjs.org/@prophouse/sdk/-/sdk-0.1.0-alpha.14.tgz#32ec4b5499f8b818b82a47a9fc93ca5dbcec9ff1"
-  integrity sha512-RppUysCdq2WkY5ZACHcA3p62QGkWBo3K7EBB52sUERV4xnjxGebKbiwwvwrF24aAN4nARPJRDlN17lORDdSZug==
+"@prophouse/sdk@~0.1.0-alpha.22":
+  version "0.1.0-alpha.22"
+  resolved "https://registry.npmjs.org/@prophouse/sdk/-/sdk-0.1.0-alpha.22.tgz#e365e87944eb68107d6c34ca840cfe37603e5b2b"
+  integrity sha512-7cvj3VJHsG3YmLaejD0yEKO9U8Na5fKhP8Czo4AjHmxhBxGTvDk90BgjExfdMcvCEHdOeW6K4Z0MG1BHL+LJZg==
   dependencies:
     "@ethersproject/abi" "~5.7.0"
+    "@ethersproject/abstract-provider" "~5.7.0"
+    "@ethersproject/abstract-signer" "~5.7.0"
     "@ethersproject/address" "~5.7.0"
     "@ethersproject/bignumber" "~5.7.0"
     "@ethersproject/bytes" "~5.7.0"
@@ -546,7 +548,7 @@
     ethereumjs-fork-block "^4.2.4"
     ethereumjs-fork-common "^3.1.3"
     graphql "^16.5.0"
-    graphql-request "^5.2.0"
+    graphql-request "5.0.0"
     randombytes "^2.1.0"
     starknet "4.22.0"
     time-ts "^0.1.0"
@@ -1745,10 +1747,10 @@ graceful-fs@^4.1.2:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
   integrity sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==
 
-graphql-request@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.npmjs.org/graphql-request/-/graphql-request-5.2.0.tgz#a05fb54a517d91bb2d7aefa17ade4523dc5ebdca"
-  integrity sha512-pLhKIvnMyBERL0dtFI3medKqWOz/RhHdcgbZ+hMMIb32mEPa5MJSzS4AuXxfI4sRAu6JVVk5tvXuGfCWl9JYWQ==
+graphql-request@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/graphql-request/-/graphql-request-5.0.0.tgz#7504a807d0e11be11a3c448e900f0cc316aa18ef"
+  integrity sha512-SpVEnIo2J5k2+Zf76cUkdvIRaq5FMZvGQYnA4lUWYbc99m+fHh4CZYRRO/Ff4tCLQ613fzCm3SiDT64ubW5Gyw==
   dependencies:
     "@graphql-typed-document-node/core" "^3.1.1"
     cross-fetch "^3.1.5"
