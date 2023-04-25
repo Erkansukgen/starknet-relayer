@@ -1,7 +1,8 @@
 import { JsonRpcProvider } from '@ethersproject/providers';
 import { Wallet } from '@ethersproject/wallet';
 import { ChainId } from '@prophouse/sdk';
-import { Account, constants, ec, SequencerProvider } from 'starknet';
+import { constants, ec, SequencerProvider } from 'starknet';
+import { NonceManagedAccount } from './lib';
 
 // Constants
 export const ETH_PRIV_KEY = process.env.ETH_PRIVKEY || '';
@@ -19,4 +20,8 @@ export const starknetProvider = new SequencerProvider({
   chainId: constants.StarknetChainId.TESTNET
 });
 export const starknetKeyPair = ec.getKeyPair(STARKNET_PRIVKEY);
-export const starknetAccount = new Account(starknetProvider, STARKNET_ADDRESS, starknetKeyPair);
+export const starknetAccount = new NonceManagedAccount(
+  starknetProvider,
+  STARKNET_ADDRESS,
+  starknetKeyPair
+);
