@@ -519,17 +519,17 @@
   resolved "https://registry.npmjs.org/@noble/secp256k1/-/secp256k1-1.7.1.tgz#b251c70f824ce3ca7f8dc3df08d58f005cc0507c"
   integrity sha512-hOUk6AyBFmqVrv7k5WAw/LpszxVbj9gGN4JRkIX52fdFAj1UA61KXmZDvqVEm+pOyec3+fIeZB02LYa/pWOArw==
 
-"@prophouse/contracts@^0.1.0-alpha.10":
-  version "0.1.0-alpha.10"
-  resolved "https://registry.npmjs.org/@prophouse/contracts/-/contracts-0.1.0-alpha.10.tgz#55d4b1c37fce23c8b8dfacd8a8bddd85c1e3cd08"
-  integrity sha512-gaQObjDTRSGF48iYeD/PuZJChR2BS7Y5eoyrAFEu58ZYjtcR06C7IfsoOHJizMqoaYLgrpBXCehDlm1qNYLA4w==
+"@prophouse/contracts@^0.1.0-alpha.11":
+  version "0.1.0-alpha.11"
+  resolved "https://registry.npmjs.org/@prophouse/contracts/-/contracts-0.1.0-alpha.11.tgz#f1e2a32eed0b1e811c79e6584934ed2da103b45a"
+  integrity sha512-h4ttmgll53nowGbtNJadSyYdHKlyYRWwCqXZc18qGI5EQz5po7T0+JPuaIYIspUESiziZPdi2hcytOBKf1IrSA==
   dependencies:
     ethers "~5.7.2"
 
-"@prophouse/sdk@~0.1.0-alpha.22":
-  version "0.1.0-alpha.22"
-  resolved "https://registry.npmjs.org/@prophouse/sdk/-/sdk-0.1.0-alpha.22.tgz#e365e87944eb68107d6c34ca840cfe37603e5b2b"
-  integrity sha512-7cvj3VJHsG3YmLaejD0yEKO9U8Na5fKhP8Czo4AjHmxhBxGTvDk90BgjExfdMcvCEHdOeW6K4Z0MG1BHL+LJZg==
+"@prophouse/sdk@~0.1.0-alpha.24":
+  version "0.1.0-alpha.24"
+  resolved "https://registry.npmjs.org/@prophouse/sdk/-/sdk-0.1.0-alpha.24.tgz#a41428fc38c64ed1b54f5586487835055c42fa0b"
+  integrity sha512-QzUTQ1T9hn8rKJkGuVBLTQN1yA9DxHHDsg66Fx4v0PEehM7QhKjhmF4EyLGxaX77vgty+AwMheS3PTmVODVAQQ==
   dependencies:
     "@ethersproject/abi" "~5.7.0"
     "@ethersproject/abstract-provider" "~5.7.0"
@@ -543,7 +543,7 @@
     "@ethersproject/providers" "~5.7.0"
     "@ethersproject/solidity" "~5.7.0"
     "@ethersproject/wallet" "^5.7.0"
-    "@prophouse/contracts" "^0.1.0-alpha.10"
+    "@prophouse/contracts" "^0.1.0-alpha.11"
     bn.js "^5.2.1"
     ethereumjs-fork-block "^4.2.4"
     ethereumjs-fork-common "^3.1.3"

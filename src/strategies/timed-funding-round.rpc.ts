@@ -20,16 +20,16 @@ export const rpc = {
       let receipt: InvokeFunctionResponse | undefined;
 
       switch (params.action) {
-        case TimedFunding.Action.Propose:
+        case TimedFunding.Action.PROPOSE:
           receipt = await round.relaySignedProposePayload(
             starknetAccount,
-            params as TimedFunding.RequestParams<TimedFunding.Action.Propose>
+            params as TimedFunding.RequestParams<TimedFunding.Action.PROPOSE>
           );
           break;
-        case TimedFunding.Action.Vote:
+        case TimedFunding.Action.VOTE:
           receipt = await round.relaySignedVotePayload(
             starknetAccount,
-            params as TimedFunding.RequestParams<TimedFunding.Action.Vote>
+            params as TimedFunding.RequestParams<TimedFunding.Action.VOTE>
           );
           break;
         default:
